@@ -1,0 +1,18 @@
+mkdir CA_test
+  202  cd CA*
+  203  openssl genrsa -rsa -out private/ca.key.pem 4096
+  204  openssl genrsa -aes256  -out private/ca.key.pem 4096
+  205  openssl genrsa -aes256  -out ca.key.pem 4096 
+  206  ls
+  207  openssl req -x509 -new -nodes -key ca.key.pem -sha256 -days 1825 -out ca.cert.pem
+  208  openssl genrsa -noout-text-in ca.cert.pem
+  209  openssl genrsa -noout -text -in ca.cert.pem
+  210  openssl x509 -noout -text -in ca.cert.pem
+  211  openssl genrsa -aes256 -out localhost.key.pem 2048
+  212  ls -rlth
+  213  openssl req -key localhost.key.pem -new -sha256 -out localhost.csr.pem
+  214  ls -rlth
+  215  openssl x509 -req -in localhost.csr.pem -CA ca.cert.pem -CAkey ca.key.pem -CAcreateserial -out localhost.cert.pem -days 1825 -sha256
+  216  ls -rlth
+  217  history
+
