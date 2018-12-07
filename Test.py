@@ -6,8 +6,8 @@ import os
 
 
 
-localcert = os.path.join("CA_test/localhost.cert.pem")
-localkey = os.path.join("CA_test/localhost.key.pem")
+localcert = os.path.join("test/test_client.cert.pem")
+localkey = os.path.join("test/test_client.key.pem")
 CAcert = os.path.join("CA_test/ca.cert.pem")
 
 msg = {
@@ -19,7 +19,7 @@ msg = {
     'source': 'InstallDIRAC'
     }
 
-URL = 'https://localhost:1025/json'
+URL = 'https://localhost:1027/json'
 Json_msg = json.dumps(msg, separators=(', ', ': '))
 P = requests.post(URL, json=Json_msg, cert=(localcert, localkey), verify=CAcert)
 print "'Post' test of json handler"

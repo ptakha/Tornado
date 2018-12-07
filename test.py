@@ -1,16 +1,16 @@
-"""This is test for the second tornado study server"""
-import requests
-
-G = requests.get('https://localhost:1025')
-print("'Get' test of MainHandler")
-print G.text
-P = requests.post('https://localhost:1025', data={'User':'U','Password':'R'})
-print("'Post' test of user autenfication with correct data")
-print P.text
-P1 = requests.post('https://localhost:1025', data={'User':'U','Password':'Password'})
-print("'Post' test of user autenfication with incorrect data")
-print P1.text
-G1 = requests.get('https://localhost:1025/random')
-print("'Get' test of MathHandler")
-print G1.text
-
+"""This is test for the checking DN of cert function"""
+import os
+import json
+x = {"countryName": "PL", "organizationalUnitName": "Unit", "organizationName": "Some_organization", "localityName": "WARSAW", "stateOrProvinceName": "MAZOWIECKIE"}
+def DN_check(filename, client_DN ):
+    DN_file = open(filename, "r")
+    cert_dictionary_list = []
+    for line in DN_file:
+        dictionary=json.loads(line)
+        cert_dictionary_list.append(dictionary)
+    list_of_equal = filter(lambda x: x == client_DN, cert_dictionary_list)
+    if list_of_equal != 0:
+        return True
+    else: 
+		return False
+print(DN_check("Test_DN", x))
